@@ -67,7 +67,11 @@ def estimate_value(target: dict, comparables: pd.DataFrame, max_age_days: int = 
         return ValuationResult("insufficient_data", None, None, None, None, "Insuficiente", 0, 0, 0,
                                "Sin comparables compatibles", ["No hay observaciones compatibles por tipología, comuna, base de superficie y antigüedad."], [])
     df["unit_uf_m2"] = df.price_uf / df.area_m2
-    if "distance_km" not in df.columns:\n        df["distance_km"] = np.nan\n    else:\n        df["distance_km"] = pd.to_numeric(df["distance_km"], errors="coerce")\n    coords = all(target.get(k) not in (None, "") for k in ["latitude", "longitude"])
+    if "distance_km" not in df.columns:
+        df["distance_km"] = np.nan
+    else:
+        df["distance_km"] = pd.to_numeric(df["distance_km"], errors="coerce")
+    coords = all(target.get(k) not in (None, "") for k in ["latitude", "longitude"])
     if coords and {"latitude", "longitude"}.issubset(df.columns):
         def dist(row):
             if pd.isna(row.latitude) or pd.isna(row.longitude):
