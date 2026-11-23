@@ -9,7 +9,7 @@ Aplicación inicial de FC INMOBILIARIOS para estimación comercial residencial y
 - Ponderación por distancia, similitud de superficie, antigüedad del antecedente y tipo de evidencia.
 - Mediana ponderada, rango empírico y advertencias de calidad.
 - Escenarios hipotéticos de garantía hipotecaria y rendimiento bruto de arriendo.
-- Exportación de ficha en CSV y reporte HTML imprimible.
+- Exportación de comparables en CSV e informe preliminar en Markdown.
 
 ## Ejecutar localmente
 Requiere Python 3.10+.
