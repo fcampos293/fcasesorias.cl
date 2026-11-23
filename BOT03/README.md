@@ -1,0 +1,40 @@
+# BOT 03 — Tasador Inmobiliario IA | MVP 0.1
+
+Aplicación inicial de FC INMOBILIARIOS para estimación comercial residencial y comercial mediante comparables ingresados y revisados por el usuario.
+
+## Incluye
+- Tipologías: casa, departamento, terreno urbano/rural, parcela, oficina, local, bodega, industrial y uso mixto.
+- Separación explícita de superficie construida, útil, terreno y otras bases comparables.
+- Comparables clasificados como compraventa efectiva o aviso publicado.
+- Ponderación por distancia, similitud de superficie, antigüedad del antecedente y tipo de evidencia.
+- Mediana ponderada, rango empírico y advertencias de calidad.
+- Escenarios hipotéticos de garantía hipotecaria y rendimiento bruto de arriendo.
+- Exportación de ficha en CSV y reporte HTML imprimible.
+
+## Ejecutar localmente
+Requiere Python 3.10+.
+
+```bash
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# Linux/macOS: source .venv/bin/activate
+pip install -r requirements.txt
+streamlit run BOT03/app.py
+```
+
+## Despliegue
+El Dockerfile permite ejecutar el MVP en un servidor que admita Docker. Para HostGator se debe confirmar si el plan contratado es VPS/dedicado o hosting compartido y si permite procesos persistentes/contenedores. No publicar credenciales en GitHub.
+
+## Datos
+Esta versión NO consulta automáticamente SII, CBR, TOCTOC, Catastral.cl ni DescubroData. Los comparables se ingresan manualmente o mediante CSV y deben contar con fuente y autorización de uso. La integración API se hará cuando se validen contratos, licencias, cuotas y esquemas reales.
+
+## Metodología y limitaciones
+El valor central es una mediana ponderada de UF/m² de comparables compatibles. El rango es empírico, no intervalo estadístico de confianza. Los coeficientes de ponderación son heurísticos iniciales y requieren calibración con transacciones verificadas. No es tasación bancaria, pericial ni oferta de crédito.
+
+En casas, parcelas, terrenos y activos mixtos no se deben mezclar superficies de terreno y construcción. Seleccionar una base homogénea y utilizar comparables compatibles. Para valoración de suelo + edificación, capitalización de rentas y residual urbanístico se requieren módulos específicos posteriores.
+
+## Variables de entorno
+No hay claves requeridas en este MVP. Cuando se integren proveedores, usar secretos del entorno de despliegue y nunca versionarlos.
+
+## Estado
+MVP de demostración funcional. Antes de uso comercial: probar con datos reales autorizados, revisión de un tasador, backtesting por tipología/comuna, controles de seguridad y despliegue HTTPS.
