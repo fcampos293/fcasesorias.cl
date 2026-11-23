@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: bot03-fc-inmobiliarios-staging
+    runtime: docker
+    plan: free
+    region: oregon
+    branch: feat/bot03-mvp
+    dockerfilePath: ./BOT03/Dockerfile
+    dockerContext: .
+    healthCheckPath: /_stcore/health
+    envVars:
+      - key: BOT03_ACCESS_PASSWORD
+        sync: false
