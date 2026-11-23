@@ -27,3 +27,11 @@ def test_financing_is_only_arithmetic_scenario():
 
 def test_rental_yield():
     assert gross_rental_yield(25,5000) == 6.0
+
+
+def test_missing_distance_column_is_supported():
+    target={"property_type":"Casa","commune":"Providencia","basis":"Construida","area_m2":100}
+    comps=sample().drop(columns=["distance_km"])
+    result=estimate_value(target,comps)
+    assert result.status=="ok"
+    assert result.value_uf > 0
