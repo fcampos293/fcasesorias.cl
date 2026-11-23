@@ -1,9 +1,27 @@
 from datetime import date
+import os
+import hmac
 import pandas as pd
 import streamlit as st
 from valuation_engine import estimate_value, financing_scenario, gross_rental_yield
 
 st.set_page_config(page_title="BOT 03 | FC INMOBILIARIOS", page_icon="🏠", layout="wide")
+
+# Acceso de staging: la clave se configura como secreto del servicio, nunca en Git.
+_access_password = os.getenv("BOT03_ACCESS_PASSWORD", "")
+if not _access_password:
+    st.error("El entorno no está configurado: falta BOT03_ACCESS_PASSWORD.")
+    st.stop()
+if not st.session_state.get("bot03_authenticated", False):
+    st.title("BOT 03 — Acceso privado")
+    _entered = st.text_input("Contraseña de acceso", type="password")
+    if st.button("Ingresar", type="primary"):
+        if hmac.compare_digest(_entered, _access_password):
+            st.session_state["bot03_authenticated"] = True
+            st.rerun()
+        else:
+            st.error("Contraseña incorrecta.")
+    st.stop()
 st.title("BOT 03 — Tasador Inmobiliario IA")
 st.caption("FC INMOBILIARIOS · MVP 0.1 · Motor propio de comparación de mercado")
 st.warning("Estimación de apoyo comercial. No es tasación bancaria, pericial ni aprobación de crédito. La calidad del resultado depende de los comparables y sus fuentes.")
