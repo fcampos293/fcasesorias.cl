@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#102638">
+<meta name="description" content="Simula tu crédito hipotecario en UF. Calcula pie, financiamiento, dividendo y renta referencial con FC INMOBILIARIOS.">
+<title>Simulador Hipotecario | FC INMOBILIARIOS</title>
+<style>
+:root{--navy:#102638;--navy2:#193b52;--gold:#d4a017;--ink:#18232d;--muted:#65727e;--line:#dce3e8;--paper:#f4f6f8;--white:#fff;--green:#16764a;--shadow:0 16px 45px rgba(16,38,56,.10)}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:linear-gradient(120deg,var(--navy),var(--navy2));color:white;padding:22px max(22px,calc((100vw - 1160px)/2));display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-weight:800;letter-spacing:.04em}.brand span{color:var(--gold)}.tag{font-size:12px;letter-spacing:.12em;color:#d8e1e7;text-transform:uppercase}
+main{max-width:1160px;margin:38px auto;padding:0 22px}.intro{margin-bottom:26px}.eyebrow{color:#9a7411;font-weight:800;font-size:12px;letter-spacing:.13em;text-transform:uppercase}h1{font-size:clamp(28px,4vw,42px);line-height:1.12;color:var(--navy);margin:8px 0 10px}.intro p{color:var(--muted);max-width:720px;margin:0}
+.layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:22px;align-items:start}.panel{background:var(--white);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:24px}.panel h2{font-size:19px;margin:0 0 20px;color:var(--navy)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:17px}.field{min-width:0}.field.full{grid-column:1/-1}label{display:flex;justify-content:space-between;gap:8px;font-weight:650;font-size:13px;margin-bottom:7px}.hint{font-size:11px;color:var(--muted);font-weight:500}input{width:100%;border:1px solid #cbd5dc;border-radius:10px;padding:12px 13px;font:inherit;color:var(--ink);background:white}input:focus{outline:3px solid rgba(212,160,23,.22);border-color:var(--gold)}.suffix{position:relative}.suffix input{padding-right:48px}.suffix b{position:absolute;right:13px;top:11px;color:var(--muted);font-size:13px}.range-line{display:flex;align-items:center;gap:12px;margin-top:7px}.range-line input{padding:0;accent-color:var(--gold)}.range-line output{font-size:12px;font-weight:700;min-width:52px;text-align:right}
+.results{background:var(--navy);color:white;border-radius:18px;padding:24px;box-shadow:var(--shadow);position:sticky;top:18px}.results h2{color:white;margin:0 0 5px}.results .sub{color:#c6d4de;font-size:13px;margin:0 0 20px}.hero-result{background:#1b4058;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:18px;margin-bottom:15px}.hero-result small{color:#d1dce3}.amount{font-size:clamp(30px,4vw,42px);font-weight:850;line-height:1.15;margin:4px 0;color:#fff}.amount em{font-size:15px;font-style:normal;color:#d5e0e7}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.metric{padding:13px;border:1px solid rgba(255,255,255,.15);border-radius:12px}.metric small{display:block;color:#c6d4de;font-size:11px}.metric strong{display:block;font-size:18px;margin-top:4px}.income{margin-top:14px;padding:14px;border-radius:12px;background:rgba(212,160,23,.13);border:1px solid rgba(212,160,23,.4)}.income small{color:#f1d991}.income strong{display:block;font-size:23px;margin-top:2px}.disclaimer{font-size:11px;color:#d1dce3;margin:15px 0 0}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:0;border-radius:10px;padding:12px 16px;font:700 14px inherit;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.btn-primary{background:var(--gold);color:#1b2730}.btn-secondary{background:#e9eef2;color:var(--navy)}.btn:hover{filter:brightness(.96)}
+.more{margin-top:22px}.more details{background:white;border:1px solid var(--line);border-radius:12px;padding:15px 18px}.more summary{font-weight:700;color:var(--navy);cursor:pointer}.more p{color:var(--muted);font-size:13px}.notice{font-size:12px;color:var(--muted);margin:18px 2px}.notice a{color:var(--navy)}
+footer{margin-top:42px;background:#e9eef2;padding:22px;text-align:center;color:#65727e;font-size:12px}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.results{position:static}.fields{gap:14px}}@media(max-width:480px){main{margin:25px auto;padding:0 14px}.panel,.results{padding:18px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.tag{display:none}.result-grid{gap:8px}.metric strong{font-size:16px}}
+</style>
+</head>
+<body>
+<header><div class="brand">FC <span>INMOBILIARIOS</span></div><div class="tag">Simulador hipotecario</div></header>
+<main>
+<section class="intro"><div class="eyebrow">Planifica tu próxima propiedad</div><h1>¿Cuánto podrías pagar por tu vivienda?</h1><p>Simula el pie, el monto del crédito, el dividendo estimado y la renta mensual referencial que necesitarías. Ajusta los valores para explorar distintos escenarios.</p></section>
+<div class="layout">
+<section class="panel" aria-label="Datos del crédito">
+<h2>Configura tu simulación</h2>
+<div class="fields">
+<div class="field"><label for="price">Valor de la propiedad <span class="hint">En UF</span></label><input id="price" type="number" min="1" max="100000" step="1" value="3500"></div>
+<div class="field"><label for="down">Pie <span class="hint">Porcentaje</span></label><div class="suffix"><input id="down" type="number" min="0" max="90" step="0.5" value="20"><b>%</b></div><div class="range-line"><input id="downRange" type="range" min="0" max="90" step="0.5" value="20" aria-label="Ajustar porcentaje de pie"><output id="downOut">20%</output></div></div>
+<div class="field"><label for="rate">Tasa de interés anual <span class="hint">Nominal referencial</span></label><div class="suffix"><input id="rate" type="number" min="0" max="30" step="0.01" value="4.5"><b>%</b></div></div>
+<div class="field"><label for="years">Plazo del crédito <span class="hint">Años</span></label><div class="suffix"><input id="years" type="number" min="1" max="40" step="1" value="25"><b>años</b></div></div>
+<div class="field full"><label for="uf">Valor de la UF <span class="hint">Editable · CLP</span></label><input id="uf" type="number" min="1" step="0.01" value="41391.69"><div class="hint" id="ufDate">Referencia: 23-11-2026 · Banco Central de Chile</div></div>
+<div class="field full"><label for="incomeRatio">Dividendo máximo sobre renta líquida <span class="hint">Criterio referencial</span></label><div class="suffix"><input id="incomeRatio" type="number" min="5" max="50" step="1" value="25"><b>%</b></div></div>
+</div>
+<div class="actions"><button class="btn btn-primary" id="share">Compartir simulación</button><button class="btn btn-secondary" id="reset" type="button">Restablecer valores</button></div>
+</section>
+<aside class="results" aria-live="polite">
+<h2>Resultado estimado</h2><p class="sub">Proyección referencial según los parámetros ingresados.</p>
+<div class="hero-result"><small>Dividendo mensual estimado</small><div class="amount" id="paymentUf">15,56 <em>UF</em></div><small id="paymentClp">$644.192 CLP aprox.</small></div>
+<div class="result-grid">
+<div class="metric"><small>Pie requerido</small><strong id="downUf">700 UF</strong></div>
+<div class="metric"><small>Monto a financiar</small><strong id="loanUf">2.800 UF</strong></div>
+<div class="metric"><small>Precio en pesos</small><strong id="priceClp">$144,9 MM</strong></div>
+<div class="metric"><small>Crédito en pesos</small><strong id="loanClp">$115,9 MM</strong></div>
+</div>
+<div class="income"><small>Renta líquida mensual referencial</small><strong id="income">$2.576.767</strong><small id="incomeNote">Considerando que el dividendo representa el 25% de la renta.</small></div>
+<p class="disclaimer">Estimación matemática. No constituye oferta, preaprobación ni aprobación bancaria. No incluye seguros de desgravamen/incendio, gastos operacionales, impuestos, tasación, estudio de títulos ni otros cargos.</p>
+</aside>
+</div>
+<section class="more"><details><summary>¿Cómo se calcula?</summary><p>El dividendo se estima con la fórmula de anualidad: cuota = capital × tasa mensual / (1 − (1 + tasa mensual)<sup>−n</sup>). La tasa mensual se aproxima dividiendo la tasa nominal anual por 12; el número de cuotas corresponde a años × 12. El resultado se expresa en UF y se convierte a pesos con el valor UF ingresado.</p><p>La renta referencial se calcula dividiendo el dividendo en pesos por el porcentaje de renta seleccionado. Las instituciones financieras pueden utilizar criterios, tasas, seguros, políticas de riesgo y gastos diferentes.</p></details></section>
+<p class="notice">El valor de la UF se muestra como referencia y puede modificarse. Para una evaluación real, confirma el valor vigente y las condiciones directamente con la institución financiera. <a href="https://www.bcentral.cl/" target="_blank" rel="noopener">Banco Central de Chile</a>.</p>
+</main>
+<footer>FC INMOBILIARIOS · Simulador hipotecario referencial · No representa una oferta de crédito.</footer>
+<script>
+const $=id=>document.getElementById(id);
+const fmt=(n,d=2)=>new Intl.NumberFormat('es-CL',{minimumFractionDigits:d,maximumFractionDigits:d}).format(n);
+const clp=n=>new Intl.NumberFormat('es-CL',{style:'currency',currency:'CLP',maximumFractionDigits:0}).format(n);
+const ufFmt=n=>fmt(n,2)+' UF';
+function calculate(){
+ const price=Number($('price').value), downPct=Number($('down').value), rate=Number($('rate').value), years=Number($('years').value), uf=Number($('uf').value), ratio=Number($('incomeRatio').value);
+ const valid=[price,downPct,rate,years,uf,ratio].every(Number.isFinite)&&price>0&&downPct>=0&&downPct<100&&rate>=0&&years>0&&years<=40&&uf>0&&ratio>0&&ratio<=100;
+ if(!valid){$('paymentUf').textContent='Revisa los datos';$('paymentClp').textContent='Ingresa valores válidos para calcular.';return}
+ const down=price*downPct/100, loan=price-down, n=Math.round(years*12), monthly=rate/100/12;
+ const payment=monthly===0?loan/n:loan*monthly/(1-Math.pow(1+monthly,-n));
+ const paymentPesos=payment*uf, income=paymentPesos/(ratio/100);
+ $('paymentUf').innerHTML=fmt(payment)+' <em>UF</em>';$('paymentClp').textContent=clp(paymentPesos)+' aprox.';
+ $('downUf').textContent=ufFmt(down);$('loanUf').textContent=ufFmt(loan);
+ $('priceClp').textContent=clp(price*uf);$('loanClp').textContent=clp(loan*uf);
+ $('income').textContent=clp(income);$('incomeNote').textContent='Dividendo equivalente al '+fmt(ratio,0)+'% de la renta líquida.';
+ $('downOut').textContent=fmt(downPct,1)+'%';
+}
+['price','down','rate','years','uf','incomeRatio'].forEach(id=>$(id).addEventListener('input',()=>{if(id==='down')$('downRange').value=$('down').value;calculate()}));
+$('downRange').addEventListener('input',()=>{$('down').value=$('downRange').value;calculate()});
+$('reset').addEventListener('click',()=>{Object.entries({price:3500,down:20,rate:4.5,years:25,uf:41391.69,incomeRatio:25}).forEach(([k,v])=>$(k).value=v);$('downRange').value=20;calculate()});
+$('share').addEventListener('click',async()=>{
+ const summary='Simulación hipotecaria FC INMOBILIARIOS\nPropiedad: '+$('price').value+' UF\nPie: '+$('down').value+'%\nTasa anual nominal: '+$('rate').value+'%\nPlazo: '+$('years').value+' años\nDividendo estimado: '+$('paymentUf').innerText+' / '+$('paymentClp').innerText+'\nRenta referencial: '+$('income').innerText+'\nUF utilizada: $'+$('uf').value+' CLP\nCálculo referencial, no constituye aprobación.';
+ try{if(navigator.share)await navigator.share({title:'Mi simulación hipotecaria',text:summary});else if(navigator.clipboard){await navigator.clipboard.writeText(summary);$('share').textContent='Resumen copiado';setTimeout(()=>$('share').textContent='Compartir simulación',2200)}else window.prompt('Copia tu simulación:',summary)}catch(e){if(e.name!=='AbortError')window.prompt('Copia tu simulación:',summary)}
+});
+calculate();
+</script>
+</body></html>
