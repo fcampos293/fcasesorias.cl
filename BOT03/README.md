@@ -23,7 +23,7 @@ streamlit run BOT03/app.py
 ```
 
 ## Despliegue
-El Dockerfile permite ejecutar el MVP en un servidor que admita Docker. Para HostGator se debe confirmar si el plan contratado es VPS/dedicado o hosting compartido y si permite procesos persistentes/contenedores. No publicar credenciales en GitHub.
+El hosting compartido de HostGator se mantiene para dominios/DNS; no ejecuta esta aplicación. El MVP se prepara para Render mediante `render.yaml`, conectado a la rama `feat/bot03-mvp` de GitHub. Render construye el contenedor desde `BOT03/Dockerfile`. El despliegue requiere que el usuario conecte su cuenta Render al repositorio y configure `BOT03_ACCESS_PASSWORD` como secreto durante la creación del servicio. No publicar credenciales en GitHub. El plan gratuito es solo staging/pruebas: puede suspenderse por inactividad y no debe usarse para cargas de trabajo críticas.
 
 ## Datos
 Esta versión NO consulta automáticamente SII, CBR, TOCTOC, Catastral.cl ni DescubroData. Los comparables se ingresan manualmente o mediante CSV y deben contar con fuente y autorización de uso. La integración API se hará cuando se validen contratos, licencias, cuotas y esquemas reales.
@@ -34,7 +34,8 @@ El valor central es una mediana ponderada de UF/m² de comparables compatibles. 
 En casas, parcelas, terrenos y activos mixtos no se deben mezclar superficies de terreno y construcción. Seleccionar una base homogénea y utilizar comparables compatibles. Para valoración de suelo + edificación, capitalización de rentas y residual urbanístico se requieren módulos específicos posteriores.
 
 ## Variables de entorno
-No hay claves requeridas en este MVP. Cuando se integren proveedores, usar secretos del entorno de despliegue y nunca versionarlos.
+- `BOT03_ACCESS_PASSWORD`: contraseña de acceso al entorno de pruebas. Obligatoria; si falta, la aplicación no abre.
+- Cuando se integren proveedores, usar secretos del entorno de despliegue y nunca versionarlos.
 
 ## Estado
-MVP de demostración funcional. Antes de uso comercial: probar con datos reales autorizados, revisión de un tasador, backtesting por tipología/comuna, controles de seguridad y despliegue HTTPS.
+MVP de demostración funcional. Configuración de despliegue Render preparada; requiere conectar la cuenta y completar la creación del servicio. Antes de uso comercial: probar con datos reales autorizados, revisión de un tasador, backtesting por tipología/comuna, persistencia, autenticación robusta y controles de seguridad.
