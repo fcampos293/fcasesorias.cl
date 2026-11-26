@@ -44,3 +44,10 @@ MVP de demostración funcional. Configuración de despliegue Render preparada; r
 ## Estándar metodológico actualizado
 
 Consulta `BOT03/METODOLOGIA_VALORIZACION_V1.md` para el protocolo de investigación, clasificación de evidencia (transacción, oferta vigente/histórica, arriendo, remate y proyecto nuevo), comparabilidad, ajustes fundamentados, estrategia comercial, confianza y control de calidad del informe. Esta guía complementa el MVP y no implica que las funciones automatizadas estén ya implementadas en la interfaz o motor. Pendientes de desarrollo: capturar todas las categorías, producir el reporte cliente estandarizado, calcular/publicar confianza por reglas auditables y calibrar ajustes con datos verificados.
+
+## Implementación parcial del estándar (en desarrollo)
+- Se incorporó `BOT03/evidence_classifier.py` para clasificar evidencia A-F y desconocida.
+- El motor ahora excluye del cálculo directo observaciones contextuales como arriendos, remates, proyectos nuevos, ofertas históricas y categorías desconocidas; estas no se deben interpretar como comparables de venta.
+- Las categorías de cálculo directo son transacción/verificación y oferta de venta vigente.
+- Se añadieron pruebas de clasificación y exclusión contextual.
+- Esta implementación es parcial: aún no genera el informe completo, los ajustes comerciales explicables ni el registro enriquecido de fuentes automáticamente.
