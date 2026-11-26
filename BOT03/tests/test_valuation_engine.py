@@ -60,3 +60,18 @@ def test_context_only_rows_excluded_from_direct_estimate():
     assert result.status=="ok"
     assert result.comparable_count==3
     assert any("excluidas del cálculo directo" in w for w in result.warnings)
+
+
+def test_comparability_attributes_produce_explanations_and_factors():
+    comps=sample()
+    comps["bedrooms"]=[3,2,3]
+    comps["bathrooms"]=[2,1,2]
+    comps["parking"]=[1,0,1]
+    target={"property_type":"Casa","commune":"Providencia","basis":"Construida","area_m2":100,"bedrooms":3,"bathrooms":2,"parking":1}
+    result=estimate_value(target,comps)
+    assert result.status=="ok"
+    assert "comparison_notes" in result.used_comparables[0]
+    assert "attribute_similarity_factor" in result.used_comparables[0]
+    assert "similarity_score" in result.used_comparables[0]
+    assert all(0 < row["attribute_similarity_factor"] <= 1 for row in result.used_comparables)
+    assert all(0 <= row["similarity_score"] <= 100 for row in result.used_comparables)
