@@ -52,3 +52,7 @@ Aplicar a casas, departamentos, terrenos, parcelas, inmuebles comerciales, indus
 
 ### 11. Limitación actual del MVP
 La aplicación no obtiene automáticamente datos de SII, CBR ni portales; la muestra depende de datos ingresados, licencias y verificabilidad. Los pesos y heurísticas requieren calibración/backtesting. El sistema no es una tasación certificada.
+
+
+### 12. Implementación técnica parcial: factores comparativos explicables
+El motor aplica factores heurísticos de peso (no correcciones monetarias) para diferencias informadas en dormitorios, baños, estacionamientos, bodega, piso, antigüedad, conservación y ascensor. Los datos no informados no reciben penalización. Cada comparable puede mostrar factores de distancia, tamaño, recencia, evidencia y atributos, junto con notas sobre diferencias detectadas y un índice relativo de similitud (0–100 normalizado respecto de la muestra seleccionada). Estos coeficientes son reglas iniciales, no estimaciones empíricas de impacto en precio; deben calibrarse y revisarse antes del uso profesional. No se descuenta ni aumenta UF por atributos sin respaldo de datos.
