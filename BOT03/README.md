@@ -39,3 +39,8 @@ En casas, parcelas, terrenos y activos mixtos no se deben mezclar superficies de
 
 ## Estado
 MVP de demostración funcional. Configuración de despliegue Render preparada; requiere conectar la cuenta y completar la creación del servicio. Antes de uso comercial: probar con datos reales autorizados, revisión de un tasador, backtesting por tipología/comuna, persistencia, autenticación robusta y controles de seguridad.
+
+
+## Estándar metodológico actualizado
+
+Consulta `BOT03/METODOLOGIA_VALORIZACION_V1.md` para el protocolo de investigación, clasificación de evidencia (transacción, oferta vigente/histórica, arriendo, remate y proyecto nuevo), comparabilidad, ajustes fundamentados, estrategia comercial, confianza y control de calidad del informe. Esta guía complementa el MVP y no implica que las funciones automatizadas estén ya implementadas en la interfaz o motor. Pendientes de desarrollo: capturar todas las categorías, producir el reporte cliente estandarizado, calcular/publicar confianza por reglas auditables y calibrar ajustes con datos verificados.
