@@ -51,3 +51,7 @@ Consulta `BOT03/METODOLOGIA_VALORIZACION_V1.md` para el protocolo de investigaci
 - Las categorías de cálculo directo son transacción/verificación y oferta de venta vigente.
 - Se añadieron pruebas de clasificación y exclusión contextual.
 - Esta implementación es parcial: aún no genera el informe completo, los ajustes comerciales explicables ni el registro enriquecido de fuentes automáticamente.
+
+
+### Comparabilidad explicable — implementación parcial
+El motor ahora registra factores heurísticos de peso para distancia, superficie, recencia, tipo de evidencia y atributos informados (dormitorios, baños, estacionamientos, bodega, piso, antigüedad, conservación y ascensor). Incluye notas de diferencias e índice de similitud relativo. Estos factores modifican el peso del comparable, no el precio mediante ajustes monetarios inventados. Los coeficientes no están calibrados; validación y backtesting siguen pendientes.
