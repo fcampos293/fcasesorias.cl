@@ -5,9 +5,10 @@ from datetime import date
 import math
 import numpy as np
 import pandas as pd
+from evidence_classifier import classify_evidence, is_sale_valuation_evidence
 
-EFFECTIVE_SALE_TYPES = {"venta efectiva", "compraventa efectiva", "closed_sale", "cbr", "transaction"}
-LISTING_TYPES = {"oferta publicada", "aviso publicado", "listing", "offer"}
+EFFECTIVE_SALE_TYPES = {"venta efectiva", "compraventa efectiva", "closed_sale", "cbr", "transaction", "transacción verificable"}
+LISTING_TYPES = {"oferta publicada", "aviso publicado", "listing", "offer", "oferta vigente"}
 
 @dataclass
 class ValuationResult:
@@ -63,6 +64,8 @@ def estimate_value(target: dict, comparables: pd.DataFrame, max_age_days: int = 
     df = df[df.commune.map(_norm) == _norm(target["commune"])]
     df = df[df.basis.map(_norm) == _norm(target["basis"])]
     df = df[df.date >= today - pd.Timedelta(days=max_age_days)].copy()
+    contextual_count = int((~df.evidence_type.map(is_sale_valuation_evidence)).sum())
+    df = df[df.evidence_type.map(is_sale_valuation_evidence)].copy()
     if df.empty:
         return ValuationResult("insufficient_data", None, None, None, None, "Insuficiente", 0, 0, 0,
                                "Sin comparables compatibles", ["No hay observaciones compatibles por tipología, comuna, base de superficie y antigüedad."], [])
@@ -99,6 +102,8 @@ def estimate_value(target: dict, comparables: pd.DataFrame, max_age_days: int = 
     else:
         excluded = 0
     warnings = []
+    if contextual_count:
+        warnings.append(f"{contextual_count} observación(es) de contexto (arriendo, remate, proyecto nuevo, oferta histórica o tipo desconocido) excluidas del cálculo directo de valor de venta.")
     if excluded:
         warnings.append(f"{excluded} observación(es) fuera de 1,5 IQR excluidas del cálculo.")
     sales = df[df.evidence_type.map(_norm).isin(EFFECTIVE_SALE_TYPES)]
